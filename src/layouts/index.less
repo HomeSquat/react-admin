@@ -1,3 +1,12 @@
-.a {
-  height: 100%
+.app {
+  height: 100%;
+  &.collapsed {
+    .right {
+      margin-left: 80px;
+    }
+  }
+  .right {
+    margin-left: 256px;
+    transition: margin-left .2s
+  }
 }

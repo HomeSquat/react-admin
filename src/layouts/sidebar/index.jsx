@@ -1,19 +1,29 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Menu, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
+import logoImg from '@/assets/image/logo.png';
 import './index.less';
 
 class Sidebar extends PureComponent {
   render() {
+    let { collapsed } = this.props
     return (
-      <div className="sidebar">
+      <Layout.Sider
+        className="sidebar"
+        width="256"
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        >
+        <div className="logo">
+          <img src={logoImg} alt=""/>
+        </div>
         <Menu
           className="menu"
           theme="dark"
           onClick={this.handleClick}
-          style={{ width: 256 }}
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
+          defaultSelectedKeys={['4']}
+          // defaultOpenKeys={['sub1']}
           mode="inline"
         >
           <Menu.SubMenu
@@ -65,13 +75,14 @@ class Sidebar extends PureComponent {
             <Menu.Item key="12">Option 12</Menu.Item>
           </Menu.SubMenu>
         </Menu>
-      </div>
+
+      </Layout.Sider>
     )
   }
 }
 
-// const mapStateProps = state => ({
+const mapStateProps = state => ({
+  collapsed: state.getIn(['common','collapsed'])
+})
 
-// })
-
-export default connect(null, null)(Sidebar)
+export default connect(mapStateProps, null)(Sidebar)

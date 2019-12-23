@@ -1,27 +1,26 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router';
-import Sidebar from './sidebar';
-import homePage from '@/pages/home';
+import { Layout } from 'antd';
+import { Sidebar, Header, Main } from './components';
 import './index.less';
 
-class Layout extends PureComponent {
+class LayoutAPP extends PureComponent {
   render() {
+    let { collapsed } = this.props
     return (
-      <Fragment>
-        <Sidebar />
-        <main>
-          <Switch>
-            <Route path="/app/main" exact component={Dashboard} />
-          </Switch>
-        </main>
-      </Fragment>
+      <Layout className={`app ${collapsed ? "collapsed":""}`}>
+        <Sidebar/>
+        <Layout className="right">
+          <Header/>
+          <Main/>
+        </Layout>
+      </Layout>
     )
   }
 }
 
-// const mapStateProps = state => ({
+const mapStateProps = state => ({
+  collapsed: state.getIn(['common', 'collapsed'])
+})
 
-// })
-
-export default connect(null,null)(Layout)
+export default connect(mapStateProps,null)(LayoutAPP)

@@ -4,15 +4,17 @@ import Layout from './layouts';
 import errorPage from '@/pages/error';
 import loginPage from '@/pages/login';
 import '@/assets/css/index.less';
+
 function App() {
   return (
     <Fragment>
       <BrowserRouter>
         <Switch>
 
-          <Route path="/" exact render={() => <Redirect to="/app/main"/>}></Route>
+          <Route path="/" exact render={() => <Redirect to="/app/home"/>}></Route>
+          <Route path="/app" exact render={() => <Redirect to="/app/home"/>}></Route>
 
-          {/* <Route path="/app" exact component={loginPage}></Route> */}
+          <Route path="/app" component={Layout}></Route>
           <Route path="/login" exact component={loginPage}></Route>
           <Route path="/error" exact component={errorPage}></Route>
 

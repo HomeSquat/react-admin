@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Layout from './layouts';
-import errorPage from '@/pages/error';
-import loginPage from '@/pages/login';
+import Layout from '@/layouts';
+import { staticRoutes } from '@/routes';
 import '@/assets/css/index.less';
 
 function App() {
@@ -15,8 +14,11 @@ function App() {
           <Route path="/app" exact render={() => <Redirect to="/app/home"/>}></Route>
 
           <Route path="/app" component={Layout}></Route>
-          <Route path="/login" exact component={loginPage}></Route>
-          <Route path="/error" exact component={errorPage}></Route>
+          {
+            staticRoutes.map(route => (
+              <Route path={route.path} exact={route.exact} component={route.component}></Route>
+            ))
+          }
 
         </Switch>
         
